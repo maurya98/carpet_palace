@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
+import { generateOrderId } from '@/utils/orderId'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_51ScVkCI47Bx3YedNvVyKpndudfrZY3t4ekv27kw6MvUx6r86fcpxfTqdF9bLCMhr64I7upylkMfr2SfvjhB3MCak00wNObU73c', {
   // apiVersion: '2024-11-20.acacia',
@@ -127,6 +128,9 @@ export async function POST(request: NextRequest) {
       })
     }
 
+    // Generate readable order ID
+    const customOrderId = generateOrderId()
+
     // Create Stripe Checkout Session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -143,6 +147,7 @@ export async function POST(request: NextRequest) {
       },
       customer_email: shippingAddress.email,
       metadata: {
+        custom_order_id: customOrderId,
         shipping_address: JSON.stringify(shippingAddress),
         total_price: totalPrice.toString(),
       },

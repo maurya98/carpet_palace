@@ -11,6 +11,7 @@ function CheckoutSuccessContent() {
   const sessionId = searchParams.get('session_id')
   const { clearCart } = useCart()
   const [loading, setLoading] = useState(true)
+  const [customOrderId, setCustomOrderId] = useState<string | null>(null)
   const cartClearedRef = useRef(false)
 
   useEffect(() => {
@@ -18,7 +19,19 @@ function CheckoutSuccessContent() {
     if (sessionId && !cartClearedRef.current) {
       clearCart()
       cartClearedRef.current = true
-      setLoading(false)
+      
+      // Fetch custom order ID from session metadata
+      fetch(`/api/get-order-id?session_id=${sessionId}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.customOrderId) {
+            setCustomOrderId(data.customOrderId)
+          }
+          setLoading(false)
+        })
+        .catch(() => {
+          setLoading(false)
+        })
     } else if (!sessionId) {
       setLoading(false)
     }
@@ -54,10 +67,13 @@ function CheckoutSuccessContent() {
             <p className="text-royal-600 mb-8">
               Your order has been confirmed and you will receive an email confirmation shortly.
             </p>
-            {sessionId && (
-              <p className="text-sm text-royal-500 mb-8">
-                Order ID: {sessionId}
-              </p>
+            {customOrderId && (
+              <div className="mb-8">
+                <p className="text-sm text-royal-600 mb-1">Order ID:</p>
+                <p className="text-lg font-mono font-semibold text-royal-900 bg-royal-50 px-4 py-2 rounded-lg inline-block">
+                  {customOrderId}
+                </p>
+              </div>
             )}
           </div>
 

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { FiMenu, FiX, FiShoppingCart, FiUser, FiSearch } from 'react-icons/fi'
+import { FiMenu, FiX, FiShoppingCart, FiPackage, FiSearch } from 'react-icons/fi'
 import { useCart } from '@/contexts/CartContext'
 import SpotlightSearch from '@/components/search/SpotlightSearch'
 import CurrencySelector from '@/components/CurrencySelector'
@@ -111,9 +111,13 @@ export default function Header() {
                 </span>
               )}
             </Link>
-            <button className="p-2 text-royal-700 hover:text-royal-900 transition-colors">
-              <FiUser className="w-5 h-5" />
-            </button>
+            <Link
+              href="/track-order"
+              className="p-2 text-royal-700 hover:text-royal-900 transition-colors"
+              title="Track Order"
+            >
+              <FiPackage className="w-5 h-5" />
+            </Link>
 
             {/* Mobile Menu Button */}
             <button
