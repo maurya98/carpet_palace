@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_51ScVkCI47Bx3YedNvVyKpndudfrZY3t4ekv27kw6MvUx6r86fcpxfTqdF9bLCMhr64I7upylkMfr2SfvjhB3MCak00wNObU73c', {
   // apiVersion: '2024-11-20.acacia',
   typescript: true,
 })
