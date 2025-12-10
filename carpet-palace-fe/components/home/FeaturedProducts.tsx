@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { FiShoppingCart, FiHeart, FiMaximize2, FiMapPin, FiTag, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { useCurrency } from '@/contexts/CurrencyContext'
 
 const featuredProducts = [
   {
@@ -123,6 +124,7 @@ const featuredProducts = [
 
 export default function FeaturedProducts() {
   const router = useRouter()
+  const { formatPrice } = useCurrency()
   const [carouselIndex, setCarouselIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
@@ -463,17 +465,17 @@ export default function FeaturedProducts() {
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
                             <span className="text-2xl font-bold text-royal-900">
-                              ${product.price.toLocaleString()}
+                              {formatPrice(product.price)}
                             </span>
                             {product.originalPrice && (
                               <span className="text-lg text-royal-500 line-through">
-                                ${product.originalPrice.toLocaleString()}
+                                {formatPrice(product.originalPrice)}
                               </span>
                             )}
                           </div>
                           {product.originalPrice && (
                             <span className="text-xs font-semibold text-gold-700 bg-gold-100 px-2 py-1 rounded">
-                              Save ${(product.originalPrice - product.price).toLocaleString()}
+                              Save {formatPrice(product.originalPrice - product.price)}
                             </span>
                           )}
                         </div>

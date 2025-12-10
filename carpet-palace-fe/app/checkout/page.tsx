@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useCart } from '@/contexts/CartContext'
+import { useCurrency } from '@/contexts/CurrencyContext'
 import { FiMapPin, FiUser, FiPhone, FiMail, FiArrowLeft, FiLoader } from 'react-icons/fi'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -20,9 +21,10 @@ interface AddressFormData {
 
 export default function CheckoutPage() {
   const { cartItems, getTotalPrice } = useCart()
+  const { country, setCountry, formatPrice, convertPrice } = useCurrency()
   const [step, setStep] = useState<'address' | 'payment'>('address')
   const [isProcessing, setIsProcessing] = useState(false)
-  const [shippingFee, setShippingFee] = useState<number | null>(null)
+  const [shippingFeeINR, setShippingFeeINR] = useState<number | null>(null)
   const [formData, setFormData] = useState<AddressFormData>({
     firstName: '',
     lastName: '',
@@ -32,10 +34,17 @@ export default function CheckoutPage() {
     city: '',
     state: '',
     zipCode: '',
-    country: 'US',
+    country: country,
   })
 
   const totalPrice = getTotalPrice()
+
+  // Sync currency context when country changes in form
+  useEffect(() => {
+    if (formData.country !== country) {
+      setCountry(formData.country)
+    }
+  }, [formData.country, country, setCountry])
 
   if (cartItems.length === 0) {
     return (
@@ -58,46 +67,47 @@ export default function CheckoutPage() {
     )
   }
 
-  const calculateShipping = (country: string, total: number): number => {
-    // Free shipping for orders over $5000
-    if (total >= 5000) {
+  const calculateShippingINR = (country: string, totalINR: number): number => {
+    // Free shipping for orders over ₹415,000 INR (equivalent to $5000 USD)
+    if (totalINR >= 415000) {
       return 0
     }
 
-    // Shipping rates based on country
-    const shippingRates: Record<string, number> = {
-      US: 50,      // United States
-      CA: 75,      // Canada
-      GB: 100,     // United Kingdom
-      AU: 120,     // Australia
-      DE: 90,      // Germany
-      FR: 90,      // France
-      IT: 90,      // Italy
-      ES: 90,      // Spain
-      NL: 90,      // Netherlands
-      BE: 90,      // Belgium
-      CH: 100,     // Switzerland
-      AT: 90,      // Austria
-      SE: 100,     // Sweden
-      NO: 100,     // Norway
-      DK: 100,     // Denmark
-      FI: 100,     // Finland
-      JP: 150,     // Japan
-      CN: 130,     // China
-      IN: 80,      // India
-      AE: 110,     // UAE
-      SA: 110,     // Saudi Arabia
-      SG: 120,     // Singapore
-      HK: 120,     // Hong Kong
-      NZ: 120,     // New Zealand
-      MX: 70,      // Mexico
-      BR: 90,      // Brazil
-      AR: 90,      // Argentina
-      ZA: 100,     // South Africa
+    // Shipping rates in INR based on country
+    // Converted from USD rates: 1 USD = 83 INR
+    const shippingRatesINR: Record<string, number> = {
+      US: 4150,    // United States (50 USD = 4150 INR)
+      CA: 6225,    // Canada (75 USD = 6225 INR)
+      GB: 8300,    // United Kingdom (100 USD = 8300 INR)
+      AU: 9960,    // Australia (120 USD = 9960 INR)
+      DE: 7470,    // Germany (90 USD = 7470 INR)
+      FR: 7470,    // France (90 USD = 7470 INR)
+      IT: 7470,    // Italy (90 USD = 7470 INR)
+      ES: 7470,    // Spain (90 USD = 7470 INR)
+      NL: 7470,    // Netherlands (90 USD = 7470 INR)
+      BE: 7470,    // Belgium (90 USD = 7470 INR)
+      CH: 8300,    // Switzerland (100 USD = 8300 INR)
+      AT: 7470,    // Austria (90 USD = 7470 INR)
+      SE: 8300,    // Sweden (100 USD = 8300 INR)
+      NO: 8300,    // Norway (100 USD = 8300 INR)
+      DK: 8300,    // Denmark (100 USD = 8300 INR)
+      FI: 8300,    // Finland (100 USD = 8300 INR)
+      JP: 12450,   // Japan (150 USD = 12450 INR)
+      CN: 10790,   // China (130 USD = 10790 INR)
+      IN: 6640,    // India (80 USD = 6640 INR)
+      AE: 9130,    // UAE (110 USD = 9130 INR)
+      SA: 9130,    // Saudi Arabia (110 USD = 9130 INR)
+      SG: 9960,    // Singapore (120 USD = 9960 INR)
+      HK: 9960,    // Hong Kong (120 USD = 9960 INR)
+      NZ: 9960,    // New Zealand (120 USD = 9960 INR)
+      MX: 5810,    // Mexico (70 USD = 5810 INR)
+      BR: 7470,    // Brazil (90 USD = 7470 INR)
+      AR: 7470,    // Argentina (90 USD = 7470 INR)
+      ZA: 8300,    // South Africa (100 USD = 8300 INR)
     }
 
-    // Default shipping for other countries
-    return shippingRates[country] || 150
+    // Default shipping for other countries (in INR)
+    return shippingRatesINR[country] || 12450
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -109,9 +119,9 @@ export default function CheckoutPage() {
     e.preventDefault()
     setIsProcessing(true)
 
-    // Calculate shipping based on address
-    const shipping = calculateShipping(formData.country, totalPrice)
-    setShippingFee(shipping)
+    // Calculate shipping in INR based on address
+    const shippingINR = calculateShippingINR(formData.country, totalPrice)
+    setShippingFeeINR(shippingINR)
 
     // Simulate API call delay
     await new Promise(resolve => setTimeout(resolve, 500))
@@ -132,8 +142,8 @@ export default function CheckoutPage() {
         body: JSON.stringify({
           items: cartItems,
           shippingAddress: formData,
-          shippingFee: shippingFee || 0,
-          totalPrice: totalPrice + (shippingFee || 0),
+          shippingFee: shippingFeeINR || 0, // shippingFee in INR, will be converted in API
+          totalPrice: totalPrice, // totalPrice is in INR, will be converted in API
         }),
       })
 
@@ -464,7 +474,7 @@ export default function CheckoutPage() {
                           {item.dimension} • {item.material}
                         </p>
                         <p className="text-sm text-royal-700 mt-1">
-                          Qty: {item.quantity} × ${item.price.toLocaleString()}
+                          Qty: {item.quantity} × {formatPrice(item.price)}
                         </p>
                       </div>
                     </div>
@@ -475,16 +485,16 @@ export default function CheckoutPage() {
               <div className="border-t border-royal-200 pt-4 space-y-3">
                 <div className="flex justify-between text-royal-700">
                   <span>Subtotal</span>
-                  <span className="font-semibold">${totalPrice.toLocaleString()}</span>
+                  <span className="font-semibold">{formatPrice(totalPrice)}</span>
                 </div>
-                {shippingFee !== null && (
+                {shippingFeeINR !== null && (
                   <div className="flex justify-between text-royal-700">
                     <span>Shipping</span>
                     <span className="font-semibold">
-                      {shippingFee === 0 ? (
+                      {shippingFeeINR === 0 ? (
                         <span className="text-gold-600">Free</span>
                       ) : (
-                        `$${shippingFee.toLocaleString()}`
+                        formatPrice(shippingFeeINR)
                       )}
                     </span>
                   </div>
@@ -493,7 +503,7 @@ export default function CheckoutPage() {
                   <div className="flex justify-between text-xl font-bold text-royal-900">
                     <span>Total</span>
                     <span>
-                      ${(totalPrice + (shippingFee || 0)).toLocaleString()}
+                      {formatPrice(totalPrice + (shippingFeeINR || 0))}
                     </span>
                   </div>
                 </div>

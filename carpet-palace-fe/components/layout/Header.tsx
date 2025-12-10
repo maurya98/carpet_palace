@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { FiMenu, FiX, FiShoppingCart, FiUser, FiSearch } from 'react-icons/fi'
 import { useCart } from '@/contexts/CartContext'
 import SpotlightSearch from '@/components/search/SpotlightSearch'
+import CurrencySelector from '@/components/CurrencySelector'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -84,6 +85,8 @@ export default function Header() {
 
           {/* Right Side Actions */}
           <div className="flex items-center space-x-4">
+            {/* Currency Selector */}
+            <CurrencySelector />
             {/* Search */}
             <button 
               onClick={handleSearchIconClick}

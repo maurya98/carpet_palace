@@ -1,12 +1,14 @@
 'use client'
 
 import { useCart } from '@/contexts/CartContext'
+import { useCurrency } from '@/contexts/CurrencyContext'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FiShoppingCart, FiPlus, FiMinus, FiTrash2, FiArrowLeft } from 'react-icons/fi'
 
 export default function CartPage() {
   const { cartItems, updateQuantity, removeFromCart, clearCart, getTotalPrice } = useCart()
+  const { formatPrice } = useCurrency()
 
   if (cartItems.length === 0) {
     return (
@@ -91,11 +93,11 @@ export default function CartPage() {
                       </div>
                       <div className="flex items-center gap-3 mb-3">
                         <span className="text-2xl font-bold text-royal-900">
-                          ${item.price.toLocaleString()}
+                          {formatPrice(item.price)}
                         </span>
                         {item.originalPrice && (
                           <span className="text-lg text-royal-500 line-through">
-                            ${item.originalPrice.toLocaleString()}
+                            {formatPrice(item.originalPrice)}
                           </span>
                         )}
                       </div>
@@ -134,7 +136,7 @@ export default function CartPage() {
                         <div className="text-right">
                           <p className="text-sm text-royal-600">Subtotal</p>
                           <p className="text-xl font-bold text-royal-900">
-                            ${(item.price * item.quantity).toLocaleString()}
+                            {formatPrice(item.price * item.quantity)}
                           </p>
                         </div>
                         <button
@@ -172,7 +174,7 @@ export default function CartPage() {
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between text-royal-700">
                   <span>Subtotal</span>
-                  <span className="font-semibold">${totalPrice.toLocaleString()}</span>
+                  <span className="font-semibold">{formatPrice(totalPrice)}</span>
                 </div>
                 <div className="flex justify-between text-royal-700">
                   <span>Shipping</span>
@@ -183,7 +185,7 @@ export default function CartPage() {
                 <div className="border-t border-royal-200 pt-4">
                   <div className="flex justify-between text-xl font-bold text-royal-900">
                     <span>Subtotal</span>
-                    <span>${totalPrice.toLocaleString()}</span>
+                    <span>{formatPrice(totalPrice)}</span>
                   </div>
                 </div>
               </div>

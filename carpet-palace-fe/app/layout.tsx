@@ -4,6 +4,7 @@ import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { CartProvider } from '@/contexts/CartContext'
+import { CurrencyProvider } from '@/contexts/CurrencyContext'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })
@@ -26,13 +27,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable} ${cormorant.variable}`}>
       <body className="font-sans">
-        <CartProvider>
-          <Header />
-          <main className="min-h-screen">
-            {children}
-          </main>
-          <Footer />
-        </CartProvider>
+        <CurrencyProvider>
+          <CartProvider>
+            <Header />
+            <main className="min-h-screen">
+              {children}
+            </main>
+            <Footer />
+          </CartProvider>
+        </CurrencyProvider>
       </body>
     </html>
   )

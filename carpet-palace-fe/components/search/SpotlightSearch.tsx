@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { FiSearch, FiX, FiPackage, FiTag, FiLayers } from 'react-icons/fi'
+import { useCurrency } from '@/contexts/CurrencyContext'
 
 interface Product {
   id: number
@@ -171,6 +172,7 @@ export default function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProp
   const [selectedIndex, setSelectedIndex] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
+  const { formatPrice } = useCurrency()
 
   // Get unique products (remove duplicates by id)
   const uniqueProducts = useMemo(() => {
@@ -411,7 +413,7 @@ export default function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProp
                   {suggestion.price ? (
                     <div className="flex-shrink-0 ml-4">
                       <span className="text-sm font-semibold text-white">
-                        ${suggestion.price.toLocaleString()}
+                        {formatPrice(suggestion.price)}
                       </span>
                     </div>
                   ) : (

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { FiShoppingCart, FiHeart, FiFilter, FiX, FiChevronDown, FiChevronUp, FiChevronLeft, FiChevronRight, FiSearch } from 'react-icons/fi'
+import { useCurrency } from '@/contexts/CurrencyContext'
 
 interface Product {
   id: number
@@ -437,6 +438,7 @@ export default function ProductGrid() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const searchQuery = searchParams.get('search') || ''
+  const { formatPrice } = useCurrency()
   const [showFilters, setShowFilters] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   
@@ -920,9 +922,9 @@ export default function ProductGrid() {
               </div>
             </div>
             <div className="flex items-center gap-2 text-sm text-royal-600">
-              <span>${filters.priceRange[0].toLocaleString()}</span>
+              <span>{formatPrice(filters.priceRange[0])}</span>
               <span>-</span>
-              <span>${filters.priceRange[1].toLocaleString()}</span>
+              <span>{formatPrice(filters.priceRange[1])}</span>
             </div>
             <input
               type="range"
@@ -1076,11 +1078,11 @@ export default function ProductGrid() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-1.5 sm:gap-2 lg:gap-3 flex-wrap">
                       <span className="text-base sm:text-xl lg:text-2xl font-bold text-royal-900">
-                        ${product.price.toLocaleString()}
+                        {formatPrice(product.price)}
                       </span>
                       {product.originalPrice && (
                         <span className="text-xs sm:text-sm lg:text-lg text-royal-500 line-through">
-                          ${product.originalPrice.toLocaleString()}
+                          {formatPrice(product.originalPrice)}
                         </span>
                       )}
                     </div>

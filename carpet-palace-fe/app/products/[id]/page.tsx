@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { FiShoppingCart, FiHeart, FiTruck, FiShield, FiCheck, FiChevronLeft, FiChevronRight, FiAlertCircle } from 'react-icons/fi'
 import { useCart } from '@/contexts/CartContext'
+import { useCurrency } from '@/contexts/CurrencyContext'
 
 interface ProductVariant {
   price: number
@@ -583,6 +584,7 @@ const allProducts: SimilarProduct[] = [
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
   const product = products[parseInt(params.id)]
   const { addToCart } = useCart()
+  const { formatPrice } = useCurrency()
 
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   const [carouselIndex, setCarouselIndex] = useState(0)
@@ -889,15 +891,15 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             <div className="mb-6">
               <div className="flex items-center gap-4 mb-2">
                 <span className="text-4xl font-bold text-royal-900">
-                  ${currentPrice.toLocaleString()}
+                  {formatPrice(currentPrice)}
                 </span>
                 {currentOriginalPrice && (
                   <>
                     <span className="text-2xl text-royal-500 line-through">
-                      ${currentOriginalPrice.toLocaleString()}
+                      {formatPrice(currentOriginalPrice)}
                     </span>
                     <span className="bg-gold-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                      Save ${(currentOriginalPrice - currentPrice).toLocaleString()}
+                      Save {formatPrice(currentOriginalPrice - currentPrice)}
                     </span>
                   </>
                 )}
@@ -1110,7 +1112,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                           />
                           {similarProduct.originalPrice && (
                             <span className="absolute top-2 right-2 bg-gold-500 text-white px-2 py-1 rounded text-xs font-semibold">
-                              Save ${(similarProduct.originalPrice - similarProduct.price).toLocaleString()}
+                              Save {formatPrice(similarProduct.originalPrice - similarProduct.price)}
                             </span>
                           )}
                         </div>
@@ -1139,11 +1141,11 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                           </div>
                           <div className="flex items-center gap-2">
                             <span className="text-lg font-bold text-royal-900">
-                              ${similarProduct.price.toLocaleString()}
+                              {formatPrice(similarProduct.price)}
                             </span>
                             {similarProduct.originalPrice && (
                               <span className="text-sm text-royal-500 line-through">
-                                ${similarProduct.originalPrice.toLocaleString()}
+                                {formatPrice(similarProduct.originalPrice)}
                               </span>
                             )}
                           </div>
