@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import ProductGrid from '@/components/products/ProductGrid'
 
 export default function ProductsPage() {
@@ -10,7 +11,13 @@ export default function ProductsPage() {
             Browse our complete collection of luxury carpets and rugs
           </p>
         </div> */}
-        <ProductGrid />
+        <Suspense fallback={
+          <div className="flex justify-center items-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-royal-800"></div>
+          </div>
+        }>
+          <ProductGrid />
+        </Suspense>
       </div>
     </div>
   )

@@ -1,12 +1,12 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useCart } from '@/contexts/CartContext'
 import Link from 'next/link'
 import { FiCheckCircle, FiArrowLeft, FiShoppingBag } from 'react-icons/fi'
 
-export default function CheckoutSuccessPage() {
+function CheckoutSuccessContent() {
   const searchParams = useSearchParams()
   const sessionId = searchParams.get('session_id')
   const { clearCart } = useCart()
@@ -80,5 +80,22 @@ export default function CheckoutSuccessPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function CheckoutSuccessPage() {
+  return (
+    <Suspense fallback={
+      <div className="py-12 md:py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-royal-800 mx-auto"></div>
+            <p className="mt-4 text-royal-600">Loading...</p>
+          </div>
+        </div>
+      </div>
+    }>
+      <CheckoutSuccessContent />
+    </Suspense>
   )
 }
