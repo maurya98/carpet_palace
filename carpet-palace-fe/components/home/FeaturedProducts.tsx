@@ -357,10 +357,12 @@ export default function FeaturedProducts() {
                           : 'hidden md:block md:w-[30%] opacity-100'
                     }`}
                     style={{
-                      transform: `translateX(${translateX}px) translateY(${translateY}px) rotate(${rotate}deg) scale(${scale})`,
+                      transform: visibleItems === 1 && isFocused
+                        ? `translateX(calc(-50% + ${translateX}px)) translateY(${translateY}px) rotate(${rotate}deg) scale(${scale})`
+                        : `translateX(${translateX}px) translateY(${translateY}px) rotate(${rotate}deg) scale(${scale})`,
                       zIndex: zIndex,
-                      left: '50%',
-                      marginLeft: isFocused ? '-190px' : '-140px', // Center the card
+                      left: visibleItems === 1 && isFocused ? '50%' : '50%',
+                      marginLeft: visibleItems === 1 && isFocused ? '0' : (isFocused ? '-190px' : '-140px'), // Center the card
                       transformOrigin: 'center center',
                       willChange: 'transform',
                     }}

@@ -344,15 +344,24 @@ export default function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProp
             style={{ color: '#ffffff' }}
             autoComplete="off"
           />
-          {query && (
+          <div className="flex items-center gap-2 ml-2">
+            {query && (
+              <button
+                onClick={() => setQuery('')}
+                className="p-1.5 hover:bg-gray-700/50 rounded-full transition-colors"
+                aria-label="Clear search"
+              >
+                <FiX className="w-4 h-4 text-gray-400" />
+              </button>
+            )}
             <button
-              onClick={() => setQuery('')}
-              className="ml-2 p-1.5 hover:bg-gray-700/50 rounded-full transition-colors"
-              aria-label="Clear search"
+              onClick={onClose}
+              className="p-1.5 hover:bg-gray-700/50 rounded-full transition-colors"
+              aria-label="Close search"
             >
-              <FiX className="w-4 h-4 text-gray-400" />
+              <FiX className="w-5 h-5 text-gray-300" />
             </button>
-          )}
+          </div>
         </div>
 
         {/* Suggestions */}
