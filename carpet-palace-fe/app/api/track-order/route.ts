@@ -85,6 +85,41 @@ export async function POST(request: NextRequest) {
     // Get custom order ID from metadata
     const customOrderId = session.metadata?.custom_order_id || session.id
 
+    // Get shipping information - try from shipping_details first, then from metadata
+    let shippingInfo = null
+    if ('shipping_details' in session && session.shipping_details) {
+      const shipping = session.shipping_details as any
+      shippingInfo = {
+        name: shipping.name || '',
+        address: {
+          line1: shipping.address?.line1 || '',
+          line2: shipping.address?.line2 || null,
+          city: shipping.address?.city || '',
+          state: shipping.address?.state || '',
+          postal_code: shipping.address?.postal_code || '',
+          country: shipping.address?.country || '',
+        },
+      }
+    } else if (session.metadata?.shipping_address) {
+      // Fallback to metadata if shipping_details not available
+      try {
+        const shippingAddress = JSON.parse(session.metadata.shipping_address)
+        shippingInfo = {
+          name: shippingAddress.name || '',
+          address: {
+            line1: shippingAddress.line1 || '',
+            line2: shippingAddress.line2 || null,
+            city: shippingAddress.city || '',
+            state: shippingAddress.state || '',
+            postal_code: shippingAddress.postal_code || '',
+            country: shippingAddress.country || '',
+          },
+        }
+      } catch (e) {
+        // If parsing fails, shippingInfo remains null
+      }
+    }
+
     // Format order details
     const orderDetails = {
       id: customOrderId,
@@ -93,19 +128,7 @@ export async function POST(request: NextRequest) {
       amount: session.amount_total || 0,
       currency: session.currency?.toUpperCase() || 'INR',
       created: session.created,
-      shipping: session.shipping_details
-        ? {
-            name: session.shipping_details.name || '',
-            address: {
-              line1: session.shipping_details.address?.line1 || '',
-              line2: session.shipping_details.address?.line2 || null,
-              city: session.shipping_details.address?.city || '',
-              state: session.shipping_details.address?.state || '',
-              postal_code: session.shipping_details.address?.postal_code || '',
-              country: session.shipping_details.address?.country || '',
-            },
-          }
-        : null,
+      shipping: shippingInfo,
       items: lineItems.data.map((item: any) => ({
         description: item.description || item.price?.product?.name || 'Product',
         quantity: item.quantity || 1,
