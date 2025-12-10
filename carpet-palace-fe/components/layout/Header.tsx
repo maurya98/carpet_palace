@@ -92,8 +92,10 @@ export default function Header() {
 
           {/* Right Side Actions */}
           <div className="flex items-center space-x-4">
-            {/* Currency Selector */}
-            <CurrencySelector />
+            {/* Currency Selector - Desktop only */}
+            <div className="hidden md:block">
+              <CurrencySelector />
+            </div>
             {/* Search */}
             <button 
               onClick={handleSearchIconClick}
@@ -118,9 +120,10 @@ export default function Header() {
                 </span>
               )}
             </Link>
+            {/* Track Order - Desktop only */}
             <Link
               href="/track-order"
-              className="p-2 text-royal-700 hover:text-royal-900 transition-colors"
+              className="hidden md:block p-2 text-royal-700 hover:text-royal-900 transition-colors"
               title="Track Order"
             >
               <FiPackage className="w-5 h-5" />
@@ -149,6 +152,27 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
+            
+            {/* Mobile-only items */}
+            <div className="pt-4 mt-4 border-t border-royal-200">
+              {/* Currency Selector in Mobile Menu */}
+              <div className="px-2 py-2">
+                <div className="text-xs font-semibold text-royal-600 uppercase tracking-wide mb-2">
+                  Country & Currency
+                </div>
+                <CurrencySelector />
+              </div>
+              
+              {/* Track Order in Mobile Menu */}
+              <Link
+                href="/track-order"
+                className="flex items-center gap-3 py-2 text-royal-700 hover:text-royal-900 font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <FiPackage className="w-5 h-5" />
+                <span>Track Order</span>
+              </Link>
+            </div>
           </nav>
         )}
       </div>

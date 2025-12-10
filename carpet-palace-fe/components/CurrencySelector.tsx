@@ -62,16 +62,16 @@ export default function CurrencySelector() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 text-royal-700 hover:text-royal-900 transition-colors rounded-lg hover:bg-royal-50"
+        className="flex items-center gap-2 px-3 py-2 text-royal-700 hover:text-royal-900 transition-colors rounded-lg hover:bg-royal-50 w-full md:w-auto"
         aria-label="Select country and currency"
       >
         <span className="text-lg">{selectedCountry.flag}</span>
-        <span className="hidden sm:inline text-sm font-medium">{selectedCountry.code}</span>
-        <FiChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <span className="text-sm font-medium">{selectedCountry.code}</span>
+        <FiChevronDown className={`w-4 h-4 transition-transform ml-auto md:ml-0 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-royal-200 z-50 max-h-96 overflow-y-auto">
+        <div className="absolute left-0 md:right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-royal-200 z-50 max-h-96 overflow-y-auto">
           <div className="p-2">
             {countries.map((countryOption) => (
               <button
