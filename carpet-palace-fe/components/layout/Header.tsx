@@ -7,12 +7,19 @@ import { FiMenu, FiX, FiShoppingCart, FiPackage, FiSearch } from 'react-icons/fi
 import { useCart } from '@/contexts/CartContext'
 import SpotlightSearch from '@/components/search/SpotlightSearch'
 import CurrencySelector from '@/components/CurrencySelector'
+import { getSearchShortcut } from '@/utils/platform'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [searchShortcut, setSearchShortcut] = useState('⌘K')
   const { getTotalItems } = useCart()
   const cartCount = getTotalItems()
+
+  // Get OS-appropriate shortcut on mount
+  useEffect(() => {
+    setSearchShortcut(getSearchShortcut())
+  }, [])
 
   // Keyboard shortcut handler (Cmd+K or Cmd+Space)
   useEffect(() => {
@@ -92,12 +99,12 @@ export default function Header() {
               onClick={handleSearchIconClick}
               className="p-2 text-royal-700 hover:text-royal-900 transition-colors relative group"
               aria-label="Search"
-              title="Search (⌘K)"
+              title={`Search (${searchShortcut})`}
             >
               <FiSearch className="w-5 h-5" />
               {/* Keyboard shortcut hint */}
               <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
-                Press ⌘K
+                Press {searchShortcut}
               </span>
             </button>
             <Link

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { FiSearch, FiX, FiPackage, FiTag, FiLayers } from 'react-icons/fi'
 import { useCurrency } from '@/contexts/CurrencyContext'
+import { getModifierKey, getSearchShortcut } from '@/utils/platform'
 
 interface Product {
   id: number
@@ -170,9 +171,17 @@ interface SpotlightSearchProps {
 export default function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProps) {
   const [query, setQuery] = useState('')
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [modifierKey, setModifierKey] = useState('⌘')
+  const [searchShortcut, setSearchShortcut] = useState('⌘K')
   const inputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
   const { formatPrice } = useCurrency()
+
+  // Get OS-appropriate keys on mount
+  useEffect(() => {
+    setModifierKey(getModifierKey())
+    setSearchShortcut(getSearchShortcut())
+  }, [])
 
   // Get unique products (remove duplicates by id)
   const uniqueProducts = useMemo(() => {
@@ -465,7 +474,11 @@ export default function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProp
             </span>
           </div>
           <div className="flex items-center gap-1">
-            <kbd className="px-1.5 py-0.5 bg-gray-800 border border-gray-600 rounded text-xs text-white">⌘</kbd>
+            {modifierKey === '⌘' ? (
+              <kbd className="px-1.5 py-0.5 bg-gray-800 border border-gray-600 rounded text-xs text-white">⌘</kbd>
+            ) : (
+              <kbd className="px-1.5 py-0.5 bg-gray-800 border border-gray-600 rounded text-xs text-white">Ctrl</kbd>
+            )}
             <kbd className="px-1.5 py-0.5 bg-gray-800 border border-gray-600 rounded text-xs text-white">K</kbd>
             <span>to open</span>
           </div>
