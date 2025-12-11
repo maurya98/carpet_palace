@@ -454,6 +454,604 @@ const products: Record<number, ProductDetail> = {
     origin: 'Turkey',
     category: 'Oriental',
   },
+  13: {
+    id: 13,
+    name: 'Contemporary Minimalist Design',
+    price: 1199,
+    originalPrice: 1499,
+    images: [
+      'https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    ],
+    rating: 4,
+    reviews: 28,
+    description: 'A contemporary minimalist carpet that brings clean lines and modern aesthetics to any space. Perfect for those who appreciate simplicity and elegance in design.',
+    features: [
+      'Minimalist Design',
+      'Synthetic Material',
+      'Easy Maintenance',
+      'Modern Aesthetic',
+      'Free Shipping',
+    ],
+    dimensions: ['5ft x 8ft', '6ft x 9ft', '8ft x 10ft'],
+    material: ['Synthetic', 'Cotton'],
+    variants: {
+      '5ft x 8ft|Synthetic': { price: 899, originalPrice: 1199, available: true },
+      '5ft x 8ft|Cotton': { price: 1099, originalPrice: 1399, available: true },
+      '6ft x 9ft|Synthetic': { price: 1199, originalPrice: 1499, available: true },
+      '6ft x 9ft|Cotton': { price: 1399, originalPrice: 1699, available: true },
+      '8ft x 10ft|Synthetic': { price: 1499, originalPrice: 1799, available: true },
+      '8ft x 10ft|Cotton': { price: 1699, originalPrice: 1999, available: false },
+    },
+    origin: 'USA',
+    category: 'Contemporary',
+  },
+  14: {
+    id: 14,
+    name: 'Vintage Antique Persian',
+    price: 3999,
+    originalPrice: null,
+    images: [
+      'https://plus.unsplash.com/premium_photo-1725570022160-85be45dc63f7?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://plus.unsplash.com/premium_photo-1725456680425-2a1793ada19b?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    ],
+    rating: 5,
+    reviews: 31,
+    description: 'An exquisite vintage antique Persian carpet that embodies centuries of traditional craftsmanship. This rare piece showcases authentic antique patterns and premium materials.',
+    features: [
+      'Antique Design',
+      'Premium Wool',
+      'Authentic Vintage Patterns',
+      'Collector\'s Item',
+      'Lifetime Warranty',
+    ],
+    dimensions: ['8ft x 10ft', '9ft x 12ft', '10ft x 14ft', '12ft x 15ft'],
+    material: ['Premium Wool', 'Silk'],
+    variants: {
+      '8ft x 10ft|Premium Wool': { price: 3499, originalPrice: null, available: true },
+      '8ft x 10ft|Silk': { price: 3999, originalPrice: null, available: true },
+      '9ft x 12ft|Premium Wool': { price: 3999, originalPrice: null, available: true },
+      '9ft x 12ft|Silk': { price: 4499, originalPrice: null, available: false },
+      '10ft x 14ft|Premium Wool': { price: 4499, originalPrice: null, available: true },
+      '10ft x 14ft|Silk': { price: 4999, originalPrice: null, available: true },
+      '12ft x 15ft|Premium Wool': { price: 5499, originalPrice: null, available: true },
+      '12ft x 15ft|Silk': { price: 5999, originalPrice: null, available: true },
+    },
+    origin: 'Iran',
+    category: 'Vintage',
+  },
+  15: {
+    id: 15,
+    name: 'Classic European Elegance',
+    price: 2399,
+    originalPrice: null,
+    images: [
+      'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://plus.unsplash.com/premium_photo-1725456680425-2a1793ada19b?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    ],
+    rating: 5,
+    reviews: 20,
+    description: 'A classic European carpet that brings timeless elegance and sophistication to your home. Inspired by European design traditions, this piece features refined patterns and premium wool construction.',
+    features: [
+      'European Design',
+      'Premium Wool',
+      'Classic Patterns',
+      'Elegant Finish',
+      'Free Shipping',
+    ],
+    dimensions: ['6ft x 9ft', '8ft x 10ft', '9ft x 12ft'],
+    material: ['Wool', 'Premium Wool'],
+    variants: {
+      '6ft x 9ft|Wool': { price: 1999, originalPrice: null, available: true },
+      '6ft x 9ft|Premium Wool': { price: 2199, originalPrice: null, available: true },
+      '8ft x 10ft|Wool': { price: 2399, originalPrice: null, available: true },
+      '8ft x 10ft|Premium Wool': { price: 2599, originalPrice: null, available: true },
+      '9ft x 12ft|Wool': { price: 2799, originalPrice: null, available: true },
+      '9ft x 12ft|Premium Wool': { price: 2999, originalPrice: null, available: false },
+    },
+    origin: 'France',
+    category: 'Classic',
+  },
+  16: {
+    id: 16,
+    name: 'Luxury Handwoven Masterpiece',
+    price: 4599,
+    originalPrice: null,
+    images: [
+      'https://plus.unsplash.com/premium_photo-1725456680425-2a1793ada19b?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://plus.unsplash.com/premium_photo-1725570022160-85be45dc63f7?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    ],
+    rating: 5,
+    reviews: 14,
+    description: 'The ultimate luxury handwoven masterpiece, crafted from the finest silk by master artisans. This exceptional piece represents the pinnacle of carpet artistry and is a true investment in luxury.',
+    features: [
+      'Handwoven Excellence',
+      'Luxury Silk Material',
+      'Master Artisan Crafted',
+      'Investment Quality',
+      'Lifetime Warranty',
+    ],
+    dimensions: ['9ft x 12ft', '10ft x 14ft', '12ft x 15ft'],
+    material: ['Silk', 'Premium Wool'],
+    variants: {
+      '9ft x 12ft|Silk': { price: 4099, originalPrice: null, available: true },
+      '9ft x 12ft|Premium Wool': { price: 3699, originalPrice: null, available: true },
+      '10ft x 14ft|Silk': { price: 4599, originalPrice: null, available: true },
+      '10ft x 14ft|Premium Wool': { price: 4199, originalPrice: null, available: false },
+      '12ft x 15ft|Silk': { price: 5299, originalPrice: null, available: true },
+      '12ft x 15ft|Premium Wool': { price: 4899, originalPrice: null, available: true },
+    },
+    origin: 'Iran',
+    category: 'Luxury',
+  },
+  17: {
+    id: 17,
+    name: 'Handmade Artisan Collection',
+    price: 3199,
+    originalPrice: 3799,
+    images: [
+      'https://images.unsplash.com/photo-1581558714049-220f0d812879?q=80&w=3401&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://plus.unsplash.com/premium_photo-1725456680425-2a1793ada19b?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    ],
+    rating: 5,
+    reviews: 17,
+    description: 'A stunning handmade artisan collection piece that showcases traditional craftsmanship. Each carpet is uniquely handcrafted by skilled artisans using time-honored techniques.',
+    features: [
+      'Handmade Craftsmanship',
+      'Premium Wool',
+      'Unique Artisan Design',
+      'Traditional Techniques',
+      'Free Shipping',
+    ],
+    dimensions: ['6ft x 9ft', '8ft x 10ft', '9ft x 12ft'],
+    material: ['Premium Wool', 'Wool'],
+    variants: {
+      '6ft x 9ft|Premium Wool': { price: 2699, originalPrice: 3299, available: true },
+      '6ft x 9ft|Wool': { price: 2399, originalPrice: 2999, available: true },
+      '8ft x 10ft|Premium Wool': { price: 3199, originalPrice: 3799, available: true },
+      '8ft x 10ft|Wool': { price: 2899, originalPrice: 3499, available: false },
+      '9ft x 12ft|Premium Wool': { price: 3699, originalPrice: 4299, available: true },
+      '9ft x 12ft|Wool': { price: 3399, originalPrice: 3999, available: true },
+    },
+    origin: 'India',
+    category: 'Handmade',
+  },
+  18: {
+    id: 18,
+    name: 'Modern Abstract Patterns',
+    price: 1399,
+    originalPrice: 1799,
+    images: [
+      'https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    ],
+    rating: 4,
+    reviews: 29,
+    description: 'A modern carpet featuring bold abstract patterns that make a statement in any contemporary space. The cotton blend offers comfort and style with easy maintenance.',
+    features: [
+      'Abstract Design',
+      'Cotton Blend',
+      'Modern Patterns',
+      'Easy Care',
+      'Free Shipping',
+    ],
+    dimensions: ['5ft x 8ft', '6ft x 9ft', '8ft x 10ft'],
+    material: ['Cotton', 'Synthetic'],
+    variants: {
+      '5ft x 8ft|Cotton': { price: 1099, originalPrice: 1499, available: true },
+      '5ft x 8ft|Synthetic': { price: 999, originalPrice: 1399, available: true },
+      '6ft x 9ft|Cotton': { price: 1299, originalPrice: 1699, available: true },
+      '6ft x 9ft|Synthetic': { price: 1199, originalPrice: 1599, available: false },
+      '8ft x 10ft|Cotton': { price: 1399, originalPrice: 1799, available: true },
+      '8ft x 10ft|Synthetic': { price: 1299, originalPrice: 1699, available: true },
+    },
+    origin: 'USA',
+    category: 'Modern',
+  },
+  19: {
+    id: 19,
+    name: 'Traditional Indian Heritage',
+    price: 2699,
+    originalPrice: null,
+    images: [
+      'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://plus.unsplash.com/premium_photo-1725456680425-2a1793ada19b?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    ],
+    rating: 5,
+    reviews: 23,
+    description: 'A beautiful traditional Indian heritage carpet that celebrates rich cultural traditions. Handwoven with intricate patterns and premium silk, this piece brings authentic Indian artistry to your home.',
+    features: [
+      'Indian Heritage Design',
+      'Premium Silk',
+      'Traditional Patterns',
+      'Cultural Authenticity',
+      'Free Shipping',
+    ],
+    dimensions: ['6ft x 9ft', '8ft x 10ft', '9ft x 12ft'],
+    material: ['Silk', 'Premium Wool'],
+    variants: {
+      '6ft x 9ft|Silk': { price: 2299, originalPrice: null, available: true },
+      '6ft x 9ft|Premium Wool': { price: 1999, originalPrice: null, available: true },
+      '8ft x 10ft|Silk': { price: 2699, originalPrice: null, available: true },
+      '8ft x 10ft|Premium Wool': { price: 2399, originalPrice: null, available: false },
+      '9ft x 12ft|Silk': { price: 3099, originalPrice: null, available: true },
+      '9ft x 12ft|Premium Wool': { price: 2799, originalPrice: null, available: true },
+    },
+    origin: 'India',
+    category: 'Traditional',
+  },
+  20: {
+    id: 20,
+    name: 'Persian Garden Paradise',
+    price: 2999,
+    originalPrice: null,
+    images: [
+      'https://plus.unsplash.com/premium_photo-1725570022160-85be45dc63f7?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://plus.unsplash.com/premium_photo-1725456680425-2a1793ada19b?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    ],
+    rating: 5,
+    reviews: 19,
+    description: 'A stunning Persian carpet inspired by garden paradise motifs. This beautiful piece features floral patterns and garden scenes that bring nature\'s beauty into your home.',
+    features: [
+      'Garden Paradise Design',
+      'Premium Wool',
+      'Floral Patterns',
+      'Nature-Inspired',
+      'Free Shipping',
+    ],
+    dimensions: ['8ft x 10ft', '9ft x 12ft', '10ft x 14ft'],
+    material: ['Premium Wool', 'Silk'],
+    variants: {
+      '8ft x 10ft|Premium Wool': { price: 2599, originalPrice: null, available: true },
+      '8ft x 10ft|Silk': { price: 2999, originalPrice: null, available: true },
+      '9ft x 12ft|Premium Wool': { price: 2999, originalPrice: null, available: true },
+      '9ft x 12ft|Silk': { price: 3399, originalPrice: null, available: false },
+      '10ft x 14ft|Premium Wool': { price: 3399, originalPrice: null, available: true },
+      '10ft x 14ft|Silk': { price: 3799, originalPrice: null, available: true },
+    },
+    origin: 'Iran',
+    category: 'Persian',
+  },
+  21: {
+    id: 21,
+    name: 'Oriental Dragon Design',
+    price: 3499,
+    originalPrice: null,
+    images: [
+      'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://plus.unsplash.com/premium_photo-1725456680425-2a1793ada19b?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://plus.unsplash.com/premium_photo-1725570022160-85be45dc63f7?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    ],
+    rating: 5,
+    reviews: 25,
+    description: 'An extraordinary Oriental carpet featuring majestic dragon designs. This luxurious silk piece showcases traditional Oriental artistry with powerful symbolic motifs.',
+    features: [
+      'Dragon Design',
+      'Luxury Silk',
+      'Traditional Oriental Art',
+      'Symbolic Motifs',
+      'Lifetime Warranty',
+    ],
+    dimensions: ['8ft x 10ft', '9ft x 12ft', '10ft x 14ft', '12ft x 15ft'],
+    material: ['Silk', 'Premium Wool'],
+    variants: {
+      '8ft x 10ft|Silk': { price: 2999, originalPrice: null, available: true },
+      '8ft x 10ft|Premium Wool': { price: 2599, originalPrice: null, available: true },
+      '9ft x 12ft|Silk': { price: 3399, originalPrice: null, available: true },
+      '9ft x 12ft|Premium Wool': { price: 2999, originalPrice: null, available: false },
+      '10ft x 14ft|Silk': { price: 3799, originalPrice: null, available: true },
+      '10ft x 14ft|Premium Wool': { price: 3399, originalPrice: null, available: true },
+      '12ft x 15ft|Silk': { price: 4499, originalPrice: null, available: true },
+      '12ft x 15ft|Premium Wool': { price: 4099, originalPrice: null, available: true },
+    },
+    origin: 'China',
+    category: 'Oriental',
+  },
+  22: {
+    id: 22,
+    name: 'Eco-Friendly Jute Natural',
+    price: 799,
+    originalPrice: 999,
+    images: [
+      'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    ],
+    rating: 4,
+    reviews: 42,
+    description: 'An eco-friendly natural jute carpet that combines sustainability with style. Perfect for environmentally conscious homes seeking natural materials and contemporary design.',
+    features: [
+      'Eco-Friendly Material',
+      'Natural Jute',
+      'Sustainable Design',
+      'Contemporary Style',
+      'Free Shipping',
+    ],
+    dimensions: ['5ft x 8ft', '6ft x 9ft', '8ft x 10ft'],
+    material: ['Jute', 'Cotton'],
+    variants: {
+      '5ft x 8ft|Jute': { price: 599, originalPrice: 799, available: true },
+      '5ft x 8ft|Cotton': { price: 699, originalPrice: 899, available: true },
+      '6ft x 9ft|Jute': { price: 799, originalPrice: 999, available: true },
+      '6ft x 9ft|Cotton': { price: 899, originalPrice: 1099, available: false },
+      '8ft x 10ft|Jute': { price: 999, originalPrice: 1199, available: true },
+      '8ft x 10ft|Cotton': { price: 1099, originalPrice: 1299, available: true },
+    },
+    origin: 'India',
+    category: 'Contemporary',
+  },
+  23: {
+    id: 23,
+    name: 'Bamboo Fiber Modern',
+    price: 1099,
+    originalPrice: 1399,
+    images: [
+      'https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    ],
+    rating: 4,
+    reviews: 33,
+    description: 'A modern carpet made from sustainable bamboo fiber. This eco-friendly option offers durability, natural beauty, and contemporary design for modern living spaces.',
+    features: [
+      'Bamboo Fiber',
+      'Eco-Friendly',
+      'Modern Design',
+      'Sustainable Material',
+      'Free Shipping',
+    ],
+    dimensions: ['5ft x 8ft', '6ft x 9ft', '8ft x 10ft'],
+    material: ['Bamboo', 'Synthetic'],
+    variants: {
+      '5ft x 8ft|Bamboo': { price: 799, originalPrice: 1099, available: true },
+      '5ft x 8ft|Synthetic': { price: 699, originalPrice: 999, available: true },
+      '6ft x 9ft|Bamboo': { price: 1099, originalPrice: 1399, available: true },
+      '6ft x 9ft|Synthetic': { price: 999, originalPrice: 1299, available: false },
+      '8ft x 10ft|Bamboo': { price: 1399, originalPrice: 1699, available: true },
+      '8ft x 10ft|Synthetic': { price: 1299, originalPrice: 1599, available: true },
+    },
+    origin: 'China',
+    category: 'Modern',
+  },
+  24: {
+    id: 24,
+    name: 'Viscose Soft Touch',
+    price: 999,
+    originalPrice: 1299,
+    images: [
+      'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    ],
+    rating: 4,
+    reviews: 27,
+    description: 'A soft and luxurious viscose carpet that offers exceptional comfort underfoot. The smooth texture and contemporary design make it perfect for modern homes.',
+    features: [
+      'Soft Viscose Material',
+      'Luxurious Feel',
+      'Contemporary Design',
+      'Comfortable Underfoot',
+      'Free Shipping',
+    ],
+    dimensions: ['5ft x 8ft', '6ft x 9ft', '8ft x 10ft'],
+    material: ['Viscose', 'Cotton'],
+    variants: {
+      '5ft x 8ft|Viscose': { price: 749, originalPrice: 1049, available: true },
+      '5ft x 8ft|Cotton': { price: 699, originalPrice: 999, available: true },
+      '6ft x 9ft|Viscose': { price: 999, originalPrice: 1299, available: true },
+      '6ft x 9ft|Cotton': { price: 949, originalPrice: 1249, available: false },
+      '8ft x 10ft|Viscose': { price: 1249, originalPrice: 1549, available: true },
+      '8ft x 10ft|Cotton': { price: 1199, originalPrice: 1499, available: true },
+    },
+    origin: 'USA',
+    category: 'Contemporary',
+  },
+  25: {
+    id: 25,
+    name: 'Classic Victorian Style',
+    price: 2799,
+    originalPrice: null,
+    images: [
+      'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://plus.unsplash.com/premium_photo-1725456680425-2a1793ada19b?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    ],
+    rating: 5,
+    reviews: 21,
+    description: 'A classic Victorian-style carpet that captures the elegance of the Victorian era. This luxurious piece features ornate patterns and premium wool construction.',
+    features: [
+      'Victorian Design',
+      'Premium Wool',
+      'Ornate Patterns',
+      'Era-Inspired Elegance',
+      'Free Shipping',
+    ],
+    dimensions: ['6ft x 9ft', '8ft x 10ft', '9ft x 12ft'],
+    material: ['Wool', 'Premium Wool'],
+    variants: {
+      '6ft x 9ft|Wool': { price: 2399, originalPrice: null, available: true },
+      '6ft x 9ft|Premium Wool': { price: 2599, originalPrice: null, available: true },
+      '8ft x 10ft|Wool': { price: 2799, originalPrice: null, available: true },
+      '8ft x 10ft|Premium Wool': { price: 2999, originalPrice: null, available: false },
+      '9ft x 12ft|Wool': { price: 3199, originalPrice: null, available: true },
+      '9ft x 12ft|Premium Wool': { price: 3399, originalPrice: null, available: true },
+    },
+    origin: 'United Kingdom',
+    category: 'Classic',
+  },
+  26: {
+    id: 26,
+    name: 'Luxury Cashmere Blend',
+    price: 5299,
+    originalPrice: null,
+    images: [
+      'https://plus.unsplash.com/premium_photo-1725456680425-2a1793ada19b?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://plus.unsplash.com/premium_photo-1725570022160-85be45dc63f7?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    ],
+    rating: 5,
+    reviews: 11,
+    description: 'The ultimate luxury carpet featuring a premium cashmere blend. This exclusive piece offers unparalleled softness and opulence, making it the perfect centerpiece for luxury interiors.',
+    features: [
+      'Cashmere Blend',
+      'Ultimate Luxury',
+      'Unparalleled Softness',
+      'Exclusive Collection',
+      'Lifetime Warranty',
+    ],
+    dimensions: ['9ft x 12ft', '10ft x 14ft', '12ft x 15ft'],
+    material: ['Premium Wool', 'Silk'],
+    variants: {
+      '9ft x 12ft|Premium Wool': { price: 4799, originalPrice: null, available: true },
+      '9ft x 12ft|Silk': { price: 5299, originalPrice: null, available: true },
+      '10ft x 14ft|Premium Wool': { price: 5299, originalPrice: null, available: true },
+      '10ft x 14ft|Silk': { price: 5799, originalPrice: null, available: false },
+      '12ft x 15ft|Premium Wool': { price: 5999, originalPrice: null, available: true },
+      '12ft x 15ft|Silk': { price: 6499, originalPrice: null, available: true },
+    },
+    origin: 'Mongolia',
+    category: 'Luxury',
+  },
+  27: {
+    id: 27,
+    name: 'Handmade Tribal Patterns',
+    price: 2299,
+    originalPrice: null,
+    images: [
+      'https://images.unsplash.com/photo-1581558714049-220f0d812879?q=80&w=3401&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://plus.unsplash.com/premium_photo-1725456680425-2a1793ada19b?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    ],
+    rating: 4,
+    reviews: 18,
+    description: 'A unique handmade carpet featuring authentic tribal patterns. This piece celebrates traditional tribal artistry with bold geometric designs and natural wool construction.',
+    features: [
+      'Tribal Patterns',
+      'Handmade Craftsmanship',
+      'Authentic Designs',
+      'Natural Wool',
+      'Free Shipping',
+    ],
+    dimensions: ['5ft x 8ft', '6ft x 9ft', '8ft x 10ft'],
+    material: ['Wool', 'Premium Wool'],
+    variants: {
+      '5ft x 8ft|Wool': { price: 1899, originalPrice: null, available: true },
+      '5ft x 8ft|Premium Wool': { price: 2099, originalPrice: null, available: true },
+      '6ft x 9ft|Wool': { price: 2099, originalPrice: null, available: true },
+      '6ft x 9ft|Premium Wool': { price: 2299, originalPrice: null, available: false },
+      '8ft x 10ft|Wool': { price: 2499, originalPrice: null, available: true },
+      '8ft x 10ft|Premium Wool': { price: 2699, originalPrice: null, available: true },
+    },
+    origin: 'Morocco',
+    category: 'Handmade',
+  },
+  28: {
+    id: 28,
+    name: 'Vintage Floral Elegance',
+    price: 2599,
+    originalPrice: null,
+    images: [
+      'https://plus.unsplash.com/premium_photo-1725570022160-85be45dc63f7?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://plus.unsplash.com/premium_photo-1725456680425-2a1793ada19b?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    ],
+    rating: 5,
+    reviews: 26,
+    description: 'A beautiful vintage carpet featuring elegant floral patterns. This silk masterpiece combines vintage charm with timeless elegance, perfect for classic interiors.',
+    features: [
+      'Floral Patterns',
+      'Vintage Design',
+      'Luxury Silk',
+      'Timeless Elegance',
+      'Free Shipping',
+    ],
+    dimensions: ['8ft x 10ft', '9ft x 12ft', '10ft x 14ft'],
+    material: ['Silk', 'Premium Wool'],
+    variants: {
+      '8ft x 10ft|Silk': { price: 2299, originalPrice: null, available: true },
+      '8ft x 10ft|Premium Wool': { price: 1999, originalPrice: null, available: true },
+      '9ft x 12ft|Silk': { price: 2599, originalPrice: null, available: true },
+      '9ft x 12ft|Premium Wool': { price: 2299, originalPrice: null, available: false },
+      '10ft x 14ft|Silk': { price: 2899, originalPrice: null, available: true },
+      '10ft x 14ft|Premium Wool': { price: 2599, originalPrice: null, available: true },
+    },
+    origin: 'France',
+    category: 'Vintage',
+  },
+  29: {
+    id: 29,
+    name: 'Persian Medallion Classic',
+    price: 3199,
+    originalPrice: null,
+    images: [
+      'https://images.unsplash.com/photo-1581558714049-220f0d812879?q=80&w=3401&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://plus.unsplash.com/premium_photo-1725456680425-2a1793ada19b?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    ],
+    rating: 5,
+    reviews: 30,
+    description: 'A classic Persian carpet featuring traditional medallion patterns. This premium piece showcases authentic Persian design with intricate medallion motifs and premium wool construction.',
+    features: [
+      'Medallion Design',
+      'Premium Wool',
+      'Classic Persian Patterns',
+      'Authentic Craftsmanship',
+      'Lifetime Warranty',
+    ],
+    dimensions: ['6ft x 9ft', '8ft x 10ft', '9ft x 12ft'],
+    material: ['Premium Wool', 'Silk'],
+    variants: {
+      '6ft x 9ft|Premium Wool': { price: 2699, originalPrice: null, available: true },
+      '6ft x 9ft|Silk': { price: 2999, originalPrice: null, available: true },
+      '8ft x 10ft|Premium Wool': { price: 3099, originalPrice: null, available: true },
+      '8ft x 10ft|Silk': { price: 3399, originalPrice: null, available: false },
+      '9ft x 12ft|Premium Wool': { price: 3499, originalPrice: null, available: true },
+      '9ft x 12ft|Silk': { price: 3799, originalPrice: null, available: true },
+    },
+    origin: 'Iran',
+    category: 'Persian',
+  },
+  30: {
+    id: 30,
+    name: 'Oriental Cherry Blossom',
+    price: 2899,
+    originalPrice: null,
+    images: [
+      'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      'https://plus.unsplash.com/premium_photo-1725456680425-2a1793ada19b?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    ],
+    rating: 5,
+    reviews: 22,
+    description: 'A stunning Oriental carpet featuring delicate cherry blossom patterns. This elegant silk piece captures the beauty of spring with intricate floral designs and luxurious materials.',
+    features: [
+      'Cherry Blossom Design',
+      'Luxury Silk',
+      'Floral Patterns',
+      'Spring-Inspired',
+      'Free Shipping',
+    ],
+    dimensions: ['6ft x 9ft', '8ft x 10ft', '9ft x 12ft'],
+    material: ['Silk', 'Premium Wool'],
+    variants: {
+      '6ft x 9ft|Silk': { price: 2499, originalPrice: null, available: true },
+      '6ft x 9ft|Premium Wool': { price: 2199, originalPrice: null, available: true },
+      '8ft x 10ft|Silk': { price: 2899, originalPrice: null, available: true },
+      '8ft x 10ft|Premium Wool': { price: 2599, originalPrice: null, available: false },
+      '9ft x 12ft|Silk': { price: 3299, originalPrice: null, available: true },
+      '9ft x 12ft|Premium Wool': { price: 2999, originalPrice: null, available: true },
+    },
+    origin: 'Japan',
+    category: 'Oriental',
+  },
 }
 
 // Similar products data (matching products from ProductGrid)
@@ -579,6 +1177,204 @@ const allProducts: SimilarProduct[] = [
     category: 'Oriental',
     material: 'Premium Wool',
   },
+  {
+    id: 13,
+    name: 'Contemporary Minimalist Design',
+    price: 1199,
+    originalPrice: 1499,
+    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    rating: 4,
+    reviews: 28,
+    category: 'Contemporary',
+    material: 'Synthetic',
+  },
+  {
+    id: 14,
+    name: 'Vintage Antique Persian',
+    price: 3999,
+    originalPrice: null,
+    image: 'https://plus.unsplash.com/premium_photo-1725570022160-85be45dc63f7?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    rating: 5,
+    reviews: 31,
+    category: 'Vintage',
+    material: 'Premium Wool',
+  },
+  {
+    id: 15,
+    name: 'Classic European Elegance',
+    price: 2399,
+    originalPrice: null,
+    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    rating: 5,
+    reviews: 20,
+    category: 'Classic',
+    material: 'Wool',
+  },
+  {
+    id: 16,
+    name: 'Luxury Handwoven Masterpiece',
+    price: 4599,
+    originalPrice: null,
+    image: 'https://plus.unsplash.com/premium_photo-1725456680425-2a1793ada19b?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    rating: 5,
+    reviews: 14,
+    category: 'Luxury',
+    material: 'Silk',
+  },
+  {
+    id: 17,
+    name: 'Handmade Artisan Collection',
+    price: 3199,
+    originalPrice: 3799,
+    image: 'https://images.unsplash.com/photo-1581558714049-220f0d812879?q=80&w=3401&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    rating: 5,
+    reviews: 17,
+    category: 'Handmade',
+    material: 'Premium Wool',
+  },
+  {
+    id: 18,
+    name: 'Modern Abstract Patterns',
+    price: 1399,
+    originalPrice: 1799,
+    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    rating: 4,
+    reviews: 29,
+    category: 'Modern',
+    material: 'Cotton',
+  },
+  {
+    id: 19,
+    name: 'Traditional Indian Heritage',
+    price: 2699,
+    originalPrice: null,
+    image: 'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    rating: 5,
+    reviews: 23,
+    category: 'Traditional',
+    material: 'Silk',
+  },
+  {
+    id: 20,
+    name: 'Persian Garden Paradise',
+    price: 2999,
+    originalPrice: null,
+    image: 'https://plus.unsplash.com/premium_photo-1725570022160-85be45dc63f7?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    rating: 5,
+    reviews: 19,
+    category: 'Persian',
+    material: 'Premium Wool',
+  },
+  {
+    id: 21,
+    name: 'Oriental Dragon Design',
+    price: 3499,
+    originalPrice: null,
+    image: 'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    rating: 5,
+    reviews: 25,
+    category: 'Oriental',
+    material: 'Silk',
+  },
+  {
+    id: 22,
+    name: 'Eco-Friendly Jute Natural',
+    price: 799,
+    originalPrice: 999,
+    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    rating: 4,
+    reviews: 42,
+    category: 'Contemporary',
+    material: 'Jute',
+  },
+  {
+    id: 23,
+    name: 'Bamboo Fiber Modern',
+    price: 1099,
+    originalPrice: 1399,
+    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    rating: 4,
+    reviews: 33,
+    category: 'Modern',
+    material: 'Bamboo',
+  },
+  {
+    id: 24,
+    name: 'Viscose Soft Touch',
+    price: 999,
+    originalPrice: 1299,
+    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    rating: 4,
+    reviews: 27,
+    category: 'Contemporary',
+    material: 'Viscose',
+  },
+  {
+    id: 25,
+    name: 'Classic Victorian Style',
+    price: 2799,
+    originalPrice: null,
+    image: 'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    rating: 5,
+    reviews: 21,
+    category: 'Classic',
+    material: 'Wool',
+  },
+  {
+    id: 26,
+    name: 'Luxury Cashmere Blend',
+    price: 5299,
+    originalPrice: null,
+    image: 'https://plus.unsplash.com/premium_photo-1725456680425-2a1793ada19b?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    rating: 5,
+    reviews: 11,
+    category: 'Luxury',
+    material: 'Premium Wool',
+  },
+  {
+    id: 27,
+    name: 'Handmade Tribal Patterns',
+    price: 2299,
+    originalPrice: null,
+    image: 'https://images.unsplash.com/photo-1581558714049-220f0d812879?q=80&w=3401&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    rating: 4,
+    reviews: 18,
+    category: 'Handmade',
+    material: 'Wool',
+  },
+  {
+    id: 28,
+    name: 'Vintage Floral Elegance',
+    price: 2599,
+    originalPrice: null,
+    image: 'https://plus.unsplash.com/premium_photo-1725570022160-85be45dc63f7?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    rating: 5,
+    reviews: 26,
+    category: 'Vintage',
+    material: 'Silk',
+  },
+  {
+    id: 29,
+    name: 'Persian Medallion Classic',
+    price: 3199,
+    originalPrice: null,
+    image: 'https://images.unsplash.com/photo-1581558714049-220f0d812879?q=80&w=3401&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    rating: 5,
+    reviews: 30,
+    category: 'Persian',
+    material: 'Premium Wool',
+  },
+  {
+    id: 30,
+    name: 'Oriental Cherry Blossom',
+    price: 2899,
+    originalPrice: null,
+    image: 'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    rating: 5,
+    reviews: 22,
+    category: 'Oriental',
+    material: 'Silk',
+  },
 ]
 
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
@@ -589,6 +1385,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   const [carouselIndex, setCarouselIndex] = useState(0)
   const thumbnailScrollRef = useRef<HTMLDivElement>(null)
+  const carouselRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
   
@@ -596,6 +1393,13 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   const [selectedDimension, setSelectedDimension] = useState<string>('')
   const [selectedMaterial, setSelectedMaterial] = useState<string>('')
   const [addedToCart, setAddedToCart] = useState(false)
+
+  // Touch/swipe gesture state for carousel
+  const [touchStart, setTouchStart] = useState<number | null>(null)
+  const [touchEnd, setTouchEnd] = useState<number | null>(null)
+  const [isDragging, setIsDragging] = useState(false)
+  const [dragOffset, setDragOffset] = useState(0)
+  const [hasDragged, setHasDragged] = useState(false)
 
   if (!product) {
     notFound()
@@ -642,14 +1446,15 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   // Carousel configuration - responsive products per view
   const getProductsPerView = () => {
     if (typeof window !== 'undefined') {
-      if (window.innerWidth >= 1024) return 6 // lg: 4 products
+      if (window.innerWidth >= 1280) return 4 // xl: 4 products
+      if (window.innerWidth >= 1024) return 3 // lg: 3 products
       if (window.innerWidth >= 640) return 2 // sm: 2 products
       return 1 // mobile: 1 product
     }
     return 4 // default
   }
 
-  const [productsPerView, setProductsPerView] = useState(6)
+  const [productsPerView, setProductsPerView] = useState(4)
 
   // Update products per view on window resize
   useEffect(() => {
@@ -705,6 +1510,117 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
       }
       return prev + 1
     })
+  }
+
+  // Touch/swipe handlers for carousel
+  const minSwipeDistance = 50
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null)
+    setTouchStart(e.targetTouches[0].clientX)
+    setIsDragging(true)
+    setDragOffset(0)
+    setHasDragged(false)
+  }
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    if (!touchStart) return
+    
+    const currentTouch = e.targetTouches[0].clientX
+    const distance = touchStart - currentTouch
+    setTouchEnd(currentTouch)
+    setDragOffset(distance)
+    
+    // Mark as dragged if movement is significant
+    if (Math.abs(distance) > 10) {
+      setHasDragged(true)
+      e.preventDefault()
+    }
+  }
+
+  const onTouchEnd = () => {
+    const wasDragging = hasDragged
+    
+    if (!touchStart || !touchEnd) {
+      setIsDragging(false)
+      setDragOffset(0)
+      // Reset hasDragged after a short delay to allow click handlers to check it
+      setTimeout(() => setHasDragged(false), 100)
+      return
+    }
+
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > minSwipeDistance
+    const isRightSwipe = distance < -minSwipeDistance
+
+    if (isLeftSwipe) {
+      handleNext()
+    } else if (isRightSwipe) {
+      handlePrev()
+    }
+
+    setTouchStart(null)
+    setTouchEnd(null)
+    setIsDragging(false)
+    setDragOffset(0)
+    // Reset hasDragged after a short delay to allow click handlers to check it
+    setTimeout(() => setHasDragged(false), 100)
+  }
+
+  // Mouse drag handlers for desktop
+  const [mouseStart, setMouseStart] = useState<number | null>(null)
+  const [isMouseDown, setIsMouseDown] = useState(false)
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    setIsMouseDown(true)
+    setMouseStart(e.clientX)
+    setDragOffset(0)
+    setHasDragged(false)
+  }
+
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!isMouseDown || !mouseStart) return
+    
+    const distance = mouseStart - e.clientX
+    setDragOffset(distance)
+    
+    // Mark as dragged if movement is significant
+    if (Math.abs(distance) > 10) {
+      setHasDragged(true)
+    }
+  }
+
+  const onMouseUp = () => {
+    if (!mouseStart) {
+      setIsMouseDown(false)
+      setDragOffset(0)
+      setTimeout(() => setHasDragged(false), 100)
+      return
+    }
+
+    const distance = dragOffset
+    const isLeftSwipe = distance > minSwipeDistance
+    const isRightSwipe = distance < -minSwipeDistance
+
+    if (isLeftSwipe) {
+      handleNext()
+    } else if (isRightSwipe) {
+      handlePrev()
+    }
+
+    setMouseStart(null)
+    setIsMouseDown(false)
+    setDragOffset(0)
+    setTimeout(() => setHasDragged(false), 100)
+  }
+
+  const onMouseLeave = () => {
+    if (isMouseDown) {
+      setMouseStart(null)
+      setIsMouseDown(false)
+      setDragOffset(0)
+      setTimeout(() => setHasDragged(false), 100)
+    }
   }
 
   // Check scroll position for thumbnail navigation
@@ -1084,24 +2000,47 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
               {/* Carousel Container */}
               <div className="overflow-hidden px-4">
                 <div
-                  className="flex transition-transform duration-500 ease-in-out"
+                  ref={carouselRef}
+                  className="flex transition-transform duration-500 ease-in-out select-none"
                   style={{
-                    transform: `translateX(-${carouselIndex * (100 / productsPerView)}%)`,
-                    width: `${(100 / productsPerView) * similarProducts.length}%`,
+                    transform: `translateX(calc(-${carouselIndex} * (100% + 1rem) / ${productsPerView} + ${dragOffset}px))`,
+                    transitionDuration: isDragging || isMouseDown ? '0ms' : '500ms',
+                    cursor: isMouseDown ? 'grabbing' : (similarProducts.length > productsPerView ? 'grab' : 'default'),
+                    userSelect: 'none',
+                    WebkitUserSelect: 'none',
                   }}
+                  onTouchStart={onTouchStart}
+                  onTouchMove={onTouchMove}
+                  onTouchEnd={onTouchEnd}
+                  onMouseDown={onMouseDown}
+                  onMouseMove={onMouseMove}
+                  onMouseUp={onMouseUp}
+                  onMouseLeave={onMouseLeave}
                 >
-                  {similarProducts.map((similarProduct) => (
-                    <div
-                      key={similarProduct.id}
-                      className="flex-shrink-0 px-2"
-                      style={{ 
-                        width: `${100 / productsPerView}%`,
-                        maxWidth: '280px',
-                      }}
-                    >
+                  {similarProducts.map((similarProduct, index) => {
+                    const gapCount = productsPerView - 1
+                    const itemWidth = `calc((100% - ${gapCount}rem) / ${productsPerView})`
+                    return (
+                      <div
+                        key={similarProduct.id}
+                        className="flex-shrink-0"
+                        style={{ 
+                          width: itemWidth,
+                          marginRight: index < similarProducts.length - 1 ? '1rem' : '0',
+                          minWidth: '200px',
+                          maxWidth: '280px',
+                        }}
+                      >
                       <Link
                         href={`/products/${similarProduct.id}`}
                         className="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 block h-full"
+                        onClick={(e) => {
+                          // Prevent navigation if user was dragging/swiping
+                          if (hasDragged || isDragging || isMouseDown) {
+                            e.preventDefault()
+                            e.stopPropagation()
+                          }
+                        }}
                       >
                         <div className="relative h-64 overflow-hidden">
                           <Image
@@ -1152,7 +2091,8 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                         </div>
                       </Link>
                     </div>
-                  ))}
+                    )
+                  })}
                 </div>
               </div>
 
