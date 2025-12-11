@@ -6,417 +6,12 @@ import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { FiShoppingCart, FiHeart, FiFilter, FiX, FiChevronDown, FiChevronUp, FiChevronLeft, FiChevronRight, FiSearch } from 'react-icons/fi'
 import { useCurrency } from '@/contexts/CurrencyContext'
+import { getAllProducts, getFilterOptions } from '@/app/api/products/products'
+import type { Product } from '@/app/api/mockData/products'
+import { productDetails } from '@/app/api/mockData/products'
 
-interface Product {
-  id: number
-  name: string
-  price: number
-  originalPrice: number | null
-  image: string
-  rating: number
-  reviews: number
-  category: string  
-  material: string
-  size: string
-}
-
-const allProducts: Product[] = [
-  {
-    id: 1,
-    name: 'Royal Persian Masterpiece',
-    price: 2499,
-    originalPrice: 2999,
-    image: 'https://images.unsplash.com/photo-1581558714049-220f0d812879?q=80&w=3401&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 5,
-    reviews: 24,
-    category: 'Persian',
-    material: 'Premium Wool',
-    size: '8ft x 10ft',
-  },
-  {
-    id: 2,
-    name: 'Elegant Oriental Classic',
-    price: 1899,
-    originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    rating: 5,
-    reviews: 18,
-    category: 'Oriental',
-    material: 'Silk',
-    size: '6ft x 9ft',
-  },
-  {
-    id: 3,
-    name: 'Modern Luxury Wool',
-    price: 1599,
-    originalPrice: 1999,
-    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    rating: 4,
-    reviews: 32,
-    category: 'Modern',
-    material: 'Wool',
-    size: '9ft x 12ft',
-  },
-  {
-    id: 4,
-    name: 'Traditional Silk Elegance',
-    price: 3299,
-    originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    rating: 5,
-    reviews: 15,
-    category: 'Traditional',
-    material: 'Silk',
-    size: '10ft x 14ft',
-  },
-  {
-    id: 5,
-    name: 'Vintage Persian Heritage',
-    price: 2799,
-    originalPrice: null,
-    image: 'https://plus.unsplash.com/premium_photo-1725570022160-85be45dc63f7?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 5,
-    reviews: 28,
-    category: 'Persian',
-    material: 'Premium Wool',
-    size: '8ft x 10ft',
-  },
-  {
-    id: 6,
-    name: 'Contemporary Geometric',
-    price: 1299,
-    originalPrice: 1599,
-    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    rating: 4,
-    reviews: 21,
-    category: 'Modern',
-    material: 'Synthetic',
-    size: '5ft x 8ft',
-  },
-  {
-    id: 7,
-    name: 'Classic Oriental Pattern',
-    price: 2199,
-    originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    rating: 5,
-    reviews: 19,
-    category: 'Oriental',
-    material: 'Wool',
-    size: '6ft x 9ft',
-  },
-  {
-    id: 8,
-    name: 'Premium Wool Collection',
-    price: 1699,
-    originalPrice: 1999,
-    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    rating: 4,
-    reviews: 26,
-    category: 'Wool',
-    material: 'Wool',
-    size: '9ft x 12ft',
-  },
-  {
-    id: 9,
-    name: 'Luxury Persian Silk',
-    price: 3499,
-    originalPrice: null,
-    image: 'https://plus.unsplash.com/premium_photo-1725456680425-2a1793ada19b?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 5,
-    reviews: 12,
-    category: 'Persian',
-    material: 'Silk',
-    size: '10ft x 14ft',
-  },
-  {
-    id: 10,
-    name: 'Modern Synthetic Blend',
-    price: 899,
-    originalPrice: 1199,
-    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    rating: 4,
-    reviews: 35,
-    category: 'Modern',
-    material: 'Synthetic',
-    size: '5ft x 8ft',
-  },
-  {
-    id: 11,
-    name: 'Traditional Wool Classic',
-    price: 1999,
-    originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    rating: 4,
-    reviews: 22,
-    category: 'Traditional',
-    material: 'Wool',
-    size: '8ft x 10ft',
-  },
-  {
-    id: 12,
-    name: 'Oriental Premium Collection',
-    price: 2899,
-    originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    rating: 5,
-    reviews: 16,
-    category: 'Oriental',
-    material: 'Premium Wool',
-    size: '9ft x 12ft',
-  },
-  {
-    id: 13,
-    name: 'Contemporary Minimalist Design',
-    price: 1199,
-    originalPrice: 1499,
-    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    rating: 4,
-    reviews: 28,
-    category: 'Contemporary',
-    material: 'Synthetic',
-    size: '6ft x 9ft',
-  },
-  {
-    id: 14,
-    name: 'Vintage Antique Persian',
-    price: 3999,
-    originalPrice: null,
-    image: 'https://plus.unsplash.com/premium_photo-1725570022160-85be45dc63f7?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 5,
-    reviews: 31,
-    category: 'Vintage',
-    material: 'Premium Wool',
-    size: '10ft x 14ft',
-  },
-  {
-    id: 15,
-    name: 'Classic European Elegance',
-    price: 2399,
-    originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    rating: 5,
-    reviews: 20,
-    category: 'Classic',
-    material: 'Wool',
-    size: '8ft x 10ft',
-  },
-  {
-    id: 16,
-    name: 'Luxury Handwoven Masterpiece',
-    price: 4599,
-    originalPrice: null,
-    image: 'https://plus.unsplash.com/premium_photo-1725456680425-2a1793ada19b?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 5,
-    reviews: 14,
-    category: 'Luxury',
-    material: 'Silk',
-    size: '12ft x 15ft',
-  },
-  {
-    id: 17,
-    name: 'Handmade Artisan Collection',
-    price: 3199,
-    originalPrice: 3799,
-    image: 'https://images.unsplash.com/photo-1581558714049-220f0d812879?q=80&w=3401&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 5,
-    reviews: 17,
-    category: 'Handmade',
-    material: 'Premium Wool',
-    size: '9ft x 12ft',
-  },
-  {
-    id: 18,
-    name: 'Modern Abstract Patterns',
-    price: 1399,
-    originalPrice: 1799,
-    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    rating: 4,
-    reviews: 29,
-    category: 'Modern',
-    material: 'Cotton',
-    size: '8ft x 10ft',
-  },
-  {
-    id: 19,
-    name: 'Traditional Indian Heritage',
-    price: 2699,
-    originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    rating: 5,
-    reviews: 23,
-    category: 'Traditional',
-    material: 'Silk',
-    size: '9ft x 12ft',
-  },
-  {
-    id: 20,
-    name: 'Persian Garden Paradise',
-    price: 2999,
-    originalPrice: null,
-    image: 'https://plus.unsplash.com/premium_photo-1725570022160-85be45dc63f7?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 5,
-    reviews: 19,
-    category: 'Persian',
-    material: 'Premium Wool',
-    size: '10ft x 14ft',
-  },
-  {
-    id: 21,
-    name: 'Oriental Dragon Design',
-    price: 3499,
-    originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    rating: 5,
-    reviews: 25,
-    category: 'Oriental',
-    material: 'Silk',
-    size: '12ft x 15ft',
-  },
-  {
-    id: 22,
-    name: 'Eco-Friendly Jute Natural',
-    price: 799,
-    originalPrice: 999,
-    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    rating: 4,
-    reviews: 42,
-    category: 'Contemporary',
-    material: 'Jute',
-    size: '5ft x 8ft',
-  },
-  {
-    id: 23,
-    name: 'Bamboo Fiber Modern',
-    price: 1099,
-    originalPrice: 1399,
-    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    rating: 4,
-    reviews: 33,
-    category: 'Modern',
-    material: 'Bamboo',
-    size: '6ft x 9ft',
-  },
-  {
-    id: 24,
-    name: 'Viscose Soft Touch',
-    price: 999,
-    originalPrice: 1299,
-    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    rating: 4,
-    reviews: 27,
-    category: 'Contemporary',
-    material: 'Viscose',
-    size: '8ft x 10ft',
-  },
-  {
-    id: 25,
-    name: 'Classic Victorian Style',
-    price: 2799,
-    originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    rating: 5,
-    reviews: 21,
-    category: 'Classic',
-    material: 'Wool',
-    size: '9ft x 12ft',
-  },
-  {
-    id: 26,
-    name: 'Luxury Cashmere Blend',
-    price: 5299,
-    originalPrice: null,
-    image: 'https://plus.unsplash.com/premium_photo-1725456680425-2a1793ada19b?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 5,
-    reviews: 11,
-    category: 'Luxury',
-    material: 'Premium Wool',
-    size: '12ft x 15ft',
-  },
-  {
-    id: 27,
-    name: 'Handmade Tribal Patterns',
-    price: 2299,
-    originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1581558714049-220f0d812879?q=80&w=3401&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 4,
-    reviews: 18,
-    category: 'Handmade',
-    material: 'Wool',
-    size: '8ft x 10ft',
-  },
-  {
-    id: 28,
-    name: 'Vintage Floral Elegance',
-    price: 2599,
-    originalPrice: null,
-    image: 'https://plus.unsplash.com/premium_photo-1725570022160-85be45dc63f7?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 5,
-    reviews: 26,
-    category: 'Vintage',
-    material: 'Silk',
-    size: '10ft x 14ft',
-  },
-  {
-    id: 29,
-    name: 'Persian Medallion Classic',
-    price: 3199,
-    originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1581558714049-220f0d812879?q=80&w=3401&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 5,
-    reviews: 30,
-    category: 'Persian',
-    material: 'Premium Wool',
-    size: '9ft x 12ft',
-  },
-  {
-    id: 30,
-    name: 'Oriental Cherry Blossom',
-    price: 2899,
-    originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    rating: 5,
-    reviews: 22,
-    category: 'Oriental',
-    material: 'Silk',
-    size: '8ft x 10ft',
-  },
-]
-
-// Independent filter options - separate from product list
-const AVAILABLE_CATEGORIES = [
-  'Persian',
-  'Oriental',
-  'Modern',
-  'Traditional',
-  'Wool',
-  'Contemporary',
-  'Vintage',
-  'Classic',
-  'Luxury',
-  'Handmade',
-]
-
-const AVAILABLE_MATERIALS = [
-  'Premium Wool',
-  'Wool',
-  'Silk',
-  'Synthetic',
-  'Cotton',
-  'Jute',
-  'Bamboo',
-  'Viscose',
-]
-
-const AVAILABLE_SIZES = [
-  '5ft x 8ft',
-  '6ft x 9ft',
-  '8ft x 10ft',
-  '9ft x 12ft',
-  '10ft x 14ft',
-  '12ft x 15ft',
-  'Custom Size',
-]
+// Import filter options from API
+const { categories: AVAILABLE_CATEGORIES, materials: AVAILABLE_MATERIALS, sizes: AVAILABLE_SIZES } = getFilterOptions()
 
 interface FilterState {
   categories: string[]
@@ -425,9 +20,27 @@ interface FilterState {
   priceRange: [number, number]
 }
 
-// Calculate initial price range outside component
-const getInitialPriceRange = () => {
-  const prices = allProducts.map(p => p.price)
+// Calculate initial price range - will be updated when products are loaded
+// This considers both base product prices and variant prices
+const getInitialPriceRange = (products: Product[] = []) => {
+  if (products.length === 0) {
+    return { min: 0, max: 10000 }
+  }
+  
+  const prices: number[] = []
+  
+  products.forEach(p => {
+    // Add base product price
+    prices.push(p.price)
+    
+    // Add variant prices if they exist
+    const productDetail = productDetails[p.id]
+    if (productDetail && productDetail.variants) {
+      const variantPrices = Object.values(productDetail.variants).map(v => v.price)
+      prices.push(...variantPrices)
+    }
+  })
+  
   return {
     min: Math.min(...prices),
     max: Math.max(...prices),
@@ -441,15 +54,47 @@ export default function ProductGrid() {
   const { formatPrice } = useCurrency()
   const [showFilters, setShowFilters] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
+  const [allProducts, setAllProducts] = useState<Product[]>([])
+  const [isLoading, setIsLoading] = useState(true)
   
-  // Initialize price range
-  const initialPriceRange = getInitialPriceRange()
+  // Fetch products from API
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setIsLoading(true)
+      try {
+        const products = await getAllProducts({
+          search: searchQuery || undefined,
+        })
+        setAllProducts(products)
+      } catch (error) {
+        console.error('Error fetching products:', error)
+        // Fallback to empty array on error
+        setAllProducts([])
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    fetchProducts()
+  }, [searchQuery])
+  
+  // Initialize price range - will be updated when products load
   const [filters, setFilters] = useState<FilterState>({
     categories: [],
     materials: [],
     sizes: [],
-    priceRange: [initialPriceRange.min, initialPriceRange.max],
+    priceRange: [0, 10000],
   })
+  
+  // Update price range when products are loaded
+  useEffect(() => {
+    if (allProducts.length > 0) {
+      const priceRange = getInitialPriceRange(allProducts)
+      setFilters(prev => ({
+        ...prev,
+        priceRange: [priceRange.min, priceRange.max],
+      }))
+    }
+  }, [allProducts.length])
   const [expandedSections, setExpandedSections] = useState({
     category: true,
     material: true,
@@ -471,24 +116,43 @@ export default function ProductGrid() {
 
   // Price range based on all products
   const priceRange = useMemo(() => {
-    const prices = allProducts.map(p => p.price)
-    return {
-      min: Math.min(...prices),
-      max: Math.max(...prices),
-    }
-  }, [])
+    return getInitialPriceRange(allProducts)
+  }, [allProducts])
 
   // Get product count for each filter option (for display purposes)
+  // These counts consider both base product fields and variants
   const getCategoryCount = (category: string) => {
     return allProducts.filter(p => p.category === category).length
   }
 
   const getMaterialCount = (material: string) => {
-    return allProducts.filter(p => p.material === material).length
+    return allProducts.filter(p => {
+      // Check base product material
+      if (p.material === material) {
+        return true
+      }
+      // Check variants in productDetails
+      const productDetail = productDetails[p.id]
+      if (productDetail && productDetail.material) {
+        return productDetail.material.includes(material)
+      }
+      return false
+    }).length
   }
 
   const getSizeCount = (size: string) => {
-    return allProducts.filter(p => p.size === size).length
+    return allProducts.filter(p => {
+      // Check base product size
+      if (p.size === size) {
+        return true
+      }
+      // Check variants in productDetails
+      const productDetail = productDetails[p.id]
+      if (productDetail && productDetail.dimensions) {
+        return productDetail.dimensions.includes(size)
+      }
+      return false
+    }).length
   }
 
   // Filter options based on search queries
@@ -532,44 +196,77 @@ export default function ProductGrid() {
 
   const ITEMS_TO_SHOW_INITIALLY = 5
 
-  // Filter products based on selected filters and search query
+  // Filter products based on selected filters
+  // Note: Search query is handled by the API call, but we still filter locally for other filters
+  // This filtering also checks product variants
   const filteredProducts = useMemo(() => {
     return allProducts.filter(product => {
-      // Search query filter - search in name, category, and material
-      if (searchQuery.trim()) {
-        const query = searchQuery.toLowerCase().trim()
-        const matchesName = product.name.toLowerCase().includes(query)
-        const matchesCategory = product.category.toLowerCase().includes(query)
-        const matchesMaterial = product.material.toLowerCase().includes(query)
-        
-        if (!matchesName && !matchesCategory && !matchesMaterial) {
-          return false
-        }
-      }
-
       // Category filter
       if (filters.categories.length > 0 && !filters.categories.includes(product.category)) {
         return false
       }
 
-      // Material filter
-      if (filters.materials.length > 0 && !filters.materials.includes(product.material)) {
-        return false
+      // Material filter - check both base product and variants
+      if (filters.materials.length > 0) {
+        // Check base product material
+        const baseMaterialMatches = filters.materials.includes(product.material)
+        
+        // Check variants in productDetails
+        const productDetail = productDetails?.[product.id]
+        let variantMaterialMatches = false
+        if (productDetail && Array.isArray(productDetail.material)) {
+          variantMaterialMatches = productDetail.material.some((material: string) => 
+            filters.materials.includes(material)
+          )
+        }
+        
+        // Product must match at least one material (base or variant)
+        if (!baseMaterialMatches && !variantMaterialMatches) {
+          return false
+        }
       }
 
-      // Size filter
-      if (filters.sizes.length > 0 && !filters.sizes.includes(product.size)) {
-        return false
+      // Size filter - check both base product and variants
+      if (filters.sizes.length > 0) {
+        // Check base product size
+        const baseSizeMatches = filters.sizes.includes(product.size)
+        
+        // Check variants in productDetails
+        const productDetail = productDetails?.[product.id]
+        let variantSizeMatches = false
+        if (productDetail && Array.isArray(productDetail.dimensions)) {
+          variantSizeMatches = productDetail.dimensions.some((dimension: string) => 
+            filters.sizes.includes(dimension)
+          )
+        }
+        
+        // Product must match at least one size (base or variant)
+        if (!baseSizeMatches && !variantSizeMatches) {
+          return false
+        }
       }
 
-      // Price filter
-      if (product.price < filters.priceRange[0] || product.price > filters.priceRange[1]) {
+      // Price filter - check both base product and variants
+      const basePriceInRange = product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1]
+      
+      // Check variants in productDetails
+      const productDetail = productDetails?.[product.id]
+      let variantPriceInRange = false
+      if (productDetail && productDetail.variants && typeof productDetail.variants === 'object') {
+        const variantPrices = Object.values(productDetail.variants).map((v: any) => v.price).filter((price: number) => typeof price === 'number')
+        variantPriceInRange = variantPrices.some((price: number) => 
+          price >= filters.priceRange[0] && price <= filters.priceRange[1]
+        )
+      }
+      
+      // Product must have at least one price in range (base or variant)
+      if (!basePriceInRange && !variantPriceInRange) {
         return false
       }
 
       return true
     })
-  }, [filters, searchQuery])
+  }, [filters, allProducts])
 
   // Reset to page 1 when filters or search query change
   useEffect(() => {
@@ -639,11 +336,12 @@ export default function ProductGrid() {
   }
 
   const clearFilters = () => {
+    const currentPriceRange = getInitialPriceRange(allProducts)
     setFilters({
       categories: [],
       materials: [],
       sizes: [],
-      priceRange: [priceRange.min, priceRange.max],
+      priceRange: [currentPriceRange.min, currentPriceRange.max],
     })
   }
 
@@ -1011,7 +709,12 @@ export default function ProductGrid() {
         </div>
 
         {/* Product Grid */}
-        {filteredProducts.length > 0 ? (
+        {isLoading ? (
+          <div className="text-center py-16">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-royal-800 mx-auto"></div>
+            <p className="text-royal-600 mt-4">Loading products...</p>
+          </div>
+        ) : filteredProducts.length > 0 ? (
           <>
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
               {paginatedProducts.map((product) => (

@@ -6,128 +6,34 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { FiShoppingCart, FiHeart, FiMaximize2, FiMapPin, FiTag, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { useCurrency } from '@/contexts/CurrencyContext'
-
-const featuredProducts = [
-  {
-    id: 1,
-    name: 'Royal Persian Masterpiece',
-    price: 2499,
-    originalPrice: 2999,
-    image: 'https://images.unsplash.com/photo-1740168254713-1e8695f89ffe?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 5,
-    reviews: 24,
-    category: 'Persian',
-    material: 'Premium Wool',
-    dimensions: '8ft x 10ft',
-    origin: 'Iran',
-    description: 'Handwoven by master artisans using traditional techniques',
-  },
-  {
-    id: 2,
-    name: 'Elegant Oriental Classic',
-    price: 1899,
-    originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1726463450351-4b603da0f507?q=80&w=2160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 5,
-    reviews: 18,
-    category: 'Oriental',
-    material: 'Silk',
-    dimensions: '6ft x 9ft',
-    origin: 'Turkey',
-    description: 'Luxurious silk construction with intricate Oriental patterns',
-  },
-  {
-    id: 3,
-    name: 'Modern Luxury Wool',
-    price: 1599,
-    originalPrice: 1999,
-    image: 'https://plus.unsplash.com/premium_photo-1725578455783-0ac05af0fbe8?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 4,
-    reviews: 32,
-    category: 'Modern',
-    material: 'Wool',
-    dimensions: '9ft x 12ft',
-    origin: 'India',
-    description: 'Contemporary design meets traditional quality craftsmanship',
-  },
-  {
-    id: 4,
-    name: 'Traditional Silk Elegance',
-    price: 3299,
-    originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    rating: 5,
-    reviews: 15,
-    category: 'Traditional',
-    material: 'Silk',
-    dimensions: '10ft x 14ft',
-    origin: 'China',
-    description: 'Opulent traditional silk carpet with heirloom quality',
-  },
-  {
-    id: 1,
-    name: 'Royal Persian Masterpiece',
-    price: 2499,
-    originalPrice: 2999,
-    image: 'https://images.unsplash.com/photo-1740168254713-1e8695f89ffe?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 5,
-    reviews: 24,
-    category: 'Persian',
-    material: 'Premium Wool',
-    dimensions: '8ft x 10ft',
-    origin: 'Iran',
-    description: 'Handwoven by master artisans using traditional techniques',
-  },
-  {
-    id: 2,
-    name: 'Elegant Oriental Classic',
-    price: 1899,
-    originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1726463450351-4b603da0f507?q=80&w=2160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 5,
-    reviews: 18,
-    category: 'Oriental',
-    material: 'Silk',
-    dimensions: '6ft x 9ft',
-    origin: 'Turkey',
-    description: 'Luxurious silk construction with intricate Oriental patterns',
-  },
-  {
-    id: 3,
-    name: 'Modern Luxury Wool',
-    price: 1599,
-    originalPrice: 1999,
-    image: 'https://plus.unsplash.com/premium_photo-1725578455783-0ac05af0fbe8?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 4,
-    reviews: 32,
-    category: 'Modern',
-    material: 'Wool',
-    dimensions: '9ft x 12ft',
-    origin: 'India',
-    description: 'Contemporary design meets traditional quality craftsmanship',
-  },
-  {
-    id: 4,
-    name: 'Traditional Silk Elegance',
-    price: 3299,
-    originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    rating: 5,
-    reviews: 15,  
-    category: 'Traditional',
-    material: 'Silk',
-    dimensions: '10ft x 14ft',
-    origin: 'China',
-    description: 'Opulent traditional silk carpet with heirloom quality',
-  },
-]
+import { getFeaturedProducts } from '@/app/api/products/products'
+import type { Product } from '@/app/api/mockData/products'
 
 export default function FeaturedProducts() {
   const router = useRouter()
   const { formatPrice } = useCurrency()
+  const [featuredProducts, setFeaturedProducts] = useState<Product[]>([])
   const [carouselIndex, setCarouselIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
+  // Fetch featured products from API
+  useEffect(() => {
+    const fetchFeatured = async () => {
+      setIsLoading(true)
+      try {
+        const products = await getFeaturedProducts(8)
+        setFeaturedProducts(products)
+      } catch (error) {
+        console.error('Error fetching featured products:', error)
+        setFeaturedProducts([])
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    fetchFeatured()
+  }, [])
 
   // Show 5 items at a time: 1 focused in center, 4 blurred around it
   // On mobile, show 1 item (focused)
@@ -252,6 +158,22 @@ export default function FeaturedProducts() {
   }
 
   const displayItems = getDisplayItems()
+
+  if (isLoading) {
+    return (
+      <section className="py-16 md:py-24 bg-royal-50">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-center items-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-royal-800"></div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  if (featuredProducts.length === 0) {
+    return null
+  }
 
   return (
     <section className="py-16 md:py-24 bg-royal-50">
@@ -406,18 +328,13 @@ export default function FeaturedProducts() {
                           </Link>
                         </div>
                       </div>
-                      <div className="p-6">
+                        <div className="p-6">
                         <Link href={`/products/${product.id}`}>
                           <h3 className="font-serif text-xl font-semibold text-royal-900 mb-2 hover:text-royal-700 transition-colors line-clamp-2">
                             {product.name}
                           </h3>
                         </Link>
                         
-                        {/* Description */}
-                        <p className="text-sm text-royal-600 mb-3 line-clamp-2 min-h-[2.5rem]">
-                          {product.description}
-                        </p>
-
                         {/* Category Badge */}
                         <div className="flex items-center gap-2 mb-3">
                           <FiTag className="w-4 h-4 text-royal-500" />
@@ -449,15 +366,11 @@ export default function FeaturedProducts() {
                         <div className="space-y-2 mb-4 pb-4 border-b border-royal-200">
                           <div className="flex items-center gap-2 text-sm text-royal-700">
                             <FiMaximize2 className="w-4 h-4 text-royal-500 flex-shrink-0" />
-                            <span className="text-royal-600">{product.dimensions}</span>
+                            <span className="text-royal-600">{product.size}</span>
                           </div>
                           <div className="flex items-center gap-2 text-sm text-royal-700">
                             <span className="text-royal-600 font-medium">Material:</span>
                             <span className="text-royal-700">{product.material}</span>
-                          </div>
-                          <div className="flex items-center gap-2 text-sm text-royal-700">
-                            <FiMapPin className="w-4 h-4 text-royal-500 flex-shrink-0" />
-                            <span className="text-royal-600">{product.origin}</span>
                           </div>
                         </div>
 

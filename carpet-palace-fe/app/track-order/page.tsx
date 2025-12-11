@@ -156,7 +156,7 @@ export default function TrackOrderPage() {
                   className="w-full px-4 py-3 border border-royal-300 rounded-lg focus:ring-2 focus:ring-royal-800 focus:border-transparent outline-none transition-all font-mono"
                 />
                 <p className="mt-1 text-xs text-royal-500">
-                  You can find your Order ID in the confirmation email or on the checkout success page (format: DDMMYYYYHHMMSS + random characters)
+                  You can find your Order ID in the confirmation email
                 </p>
               </div>
 

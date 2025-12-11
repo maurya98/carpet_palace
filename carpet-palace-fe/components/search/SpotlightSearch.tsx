@@ -6,16 +6,8 @@ import Image from 'next/image'
 import { FiSearch, FiX, FiPackage, FiTag, FiLayers } from 'react-icons/fi'
 import { useCurrency } from '@/contexts/CurrencyContext'
 import { getModifierKey, getSearchShortcut } from '@/utils/platform'
-
-interface Product {
-  id: number
-  name: string
-  price: number
-  originalPrice: number | null
-  image: string
-  category: string
-  material: string
-}
+import { getAllProducts, getFilterOptions } from '@/app/api/products/products'
+import type { Product } from '@/app/api/mockData/products'
 
 interface SearchSuggestion {
   type: 'product' | 'category' | 'material'
@@ -27,141 +19,10 @@ interface SearchSuggestion {
   href: string
 }
 
-// Import product data - in a real app, this would come from an API or shared data file
-const allProducts: Product[] = [
-  {
-    id: 1,
-    name: 'Royal Persian Masterpiece',
-    price: 2499,
-    originalPrice: 2999,
-    image: 'https://images.unsplash.com/photo-1581558714049-220f0d812879?q=80&w=3401&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    category: 'Persian',
-    material: 'Premium Wool',
-  },
-  {
-    id: 2,
-    name: 'Elegant Oriental Classic',
-    price: 1899,
-    originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    category: 'Oriental',
-    material: 'Silk',
-  },
-  {
-    id: 3,
-    name: 'Modern Luxury Wool',
-    price: 1599,
-    originalPrice: 1999,
-    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    category: 'Modern',
-    material: 'Wool',
-  },
-  {
-    id: 4,
-    name: 'Traditional Silk Elegance',
-    price: 3299,
-    originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    category: 'Traditional',
-    material: 'Silk',
-  },
-  {
-    id: 5,
-    name: 'Vintage Persian Heritage',
-    price: 2799,
-    originalPrice: null,
-    image: 'https://plus.unsplash.com/premium_photo-1725570022160-85be45dc63f7?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    category: 'Persian',
-    material: 'Premium Wool',
-  },
-  {
-    id: 6,
-    name: 'Contemporary Geometric',
-    price: 1299,
-    originalPrice: 1599,
-    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    category: 'Modern',
-    material: 'Synthetic',
-  },
-  {
-    id: 7,
-    name: 'Classic Oriental Pattern',
-    price: 2199,
-    originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    category: 'Oriental',
-    material: 'Wool',
-  },
-  {
-    id: 8,
-    name: 'Premium Wool Collection',
-    price: 1699,
-    originalPrice: 1999,
-    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    category: 'Wool',
-    material: 'Wool',
-  },
-  {
-    id: 9,
-    name: 'Luxury Persian Silk',
-    price: 3499,
-    originalPrice: null,
-    image: 'https://plus.unsplash.com/premium_photo-1725456680425-2a1793ada19b?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    category: 'Persian',
-    material: 'Silk',
-  },
-  {
-    id: 10,
-    name: 'Modern Synthetic Blend',
-    price: 899,
-    originalPrice: 1199,
-    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    category: 'Modern',
-    material: 'Synthetic',
-  },
-  {
-    id: 11,
-    name: 'Traditional Wool Classic',
-    price: 1999,
-    originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    category: 'Traditional',
-    material: 'Wool',
-  },
-  {
-    id: 12,
-    name: 'Oriental Premium Collection',
-    price: 2899,
-    originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    category: 'Oriental',
-    material: 'Premium Wool',
-  },
-]
+// Get filter options from API
+const { categories: AVAILABLE_CATEGORIES, materials: AVAILABLE_MATERIALS } = getFilterOptions()
 
-const AVAILABLE_CATEGORIES = [
-  'Persian',
-  'Oriental',
-  'Modern',
-  'Traditional',
-  'Wool',
-  'Contemporary',
-  'Vintage',
-  'Classic',
-  'Luxury',
-  'Handmade',
-]
-
-const AVAILABLE_MATERIALS = [
-  'Premium Wool',
-  'Wool',
-  'Silk',
-  'Synthetic',
-  'Cotton',
-  'Jute',
-  'Bamboo',
-  'Viscose',
-]
+// Filter options are now imported from API service
 
 interface SpotlightSearchProps {
   isOpen: boolean
@@ -173,6 +34,7 @@ export default function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProp
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [modifierKey, setModifierKey] = useState('⌘')
   const [searchShortcut, setSearchShortcut] = useState('⌘K')
+  const [allProducts, setAllProducts] = useState<Product[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
   const { formatPrice } = useCurrency()
@@ -183,6 +45,20 @@ export default function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProp
     setSearchShortcut(getSearchShortcut())
   }, [])
 
+  // Fetch products from API
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const products = await getAllProducts()
+        setAllProducts(products)
+      } catch (error) {
+        console.error('Error fetching products for search:', error)
+        setAllProducts([])
+      }
+    }
+    fetchProducts()
+  }, [])
+
   // Get unique products (remove duplicates by id)
   const uniqueProducts = useMemo(() => {
     const seen = new Set<number>()
@@ -191,7 +67,7 @@ export default function SpotlightSearch({ isOpen, onClose }: SpotlightSearchProp
       seen.add(p.id)
       return true
     })
-  }, [])
+  }, [allProducts])
 
   // Generate suggestions based on query
   const suggestions = useMemo<SearchSuggestion[]>(() => {
